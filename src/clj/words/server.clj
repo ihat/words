@@ -1,4 +1,5 @@
 (ns words.server
+  (:refer-clojure :exclude [read])
   (:require
    [clojure.string :as str]
    [compojure.core :refer [defroutes context GET]]
@@ -8,6 +9,7 @@
    [noir.io :as io]
    [hiccup.page :as page]
    [hiccup.element :as element]
+   [ring.adapter.jetty :as ring]
    [wordnik.core :as wn]
    [wordnik.api.word :as wn-word]
    [wordnik.api.words :as wn-words]
@@ -86,3 +88,6 @@
   (resources "/"))
 
 (def handler (-> routes handler/api))
+
+(defn main []
+  (ring/run-jetty #'routes {:port 9090 :join? false}))

@@ -17,6 +17,7 @@
             [lein-cljsbuild "0.3.3"]]
   :source-paths ["src/clj"]
   :ring {:handler words.server/handler}
+  :main ^:skip-aot words.server
   :cljsbuild
   {:builds
    [{:source-paths ["src/cljs"]
